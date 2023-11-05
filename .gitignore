@@ -1,0 +1,95 @@
+# Ignore database files
+*.sqlite3
+*.db
+
+# Ignore media files
+media/
+
+# Ignore static files
+staticfiles/
+static/
+
+# Ignore virtual environment
+venv/
+env/
+__pycache__/
+
+# Ignore configuration files
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.log
+*.pot
+*.po
+*.mo
+*.egg-info/
+.env
+db.sqlite3
+
+# Ignore system and temporary files
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+*.swo
+__init__.py
+*.pyc
+
+# Ignore local development settings
+settings/local.py
+
+# Ignore secret settings
+settings/secret_key.py
+
+# Ignore cache and session directories
+__pycache__/
+cache/
+sessions/
+
+# Ignore migration files if using South
+migrations/
+
+# Ignore development and deployment artifacts
+*.bak
+*.log
+*.tmp
+*.pid
+*.pkl
+*.swp
+*.bak
+*.cache
+*.pyc
+*.tmp
+*.DS_Store
+
+# Ignore coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Ignore Heroku-specific files
+Procfile
+runtime.txt
+
+# Ignore Python bytecode files
+__pycache__/
+
+# Ignore environment-specific settings
+.env
+.env.*
+
+# Ignore system files
+.vscode/
+__pycache__/
+node_modules/
+
+# Ignore logs
+logs/
+
+# Ignore compiled files
+*.pyc
+
+# Ignore database backup files
+*.bak
+*.sql
