@@ -6,6 +6,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
+            <br>
+            <br>
+            <br>
             {% if user.is_authenticated %}
             <p>Welcome {{ user.username }} !!!</p>
             <form hx-post="{% url 'shorten_url' %}" hx-target="#message">
@@ -25,6 +28,30 @@
             {% endif %}
         </div>
     </div>
+    {% if user.is_authenticated %}
+    <div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Link</th>
+                <th scope="col">Shortned url</th>
+                <th scope="col">Number of Views</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for link in links %}
+              <tr>
+                <th scope="row">1</th>
+                <td><a href="{{link.original_url}}">{{link.original_url}}</a></td>
+                <td><a href="http://127.0.0.1:8000/{{link.slug}}">http://127.0.0.1:8000/{{link.slug}}</a></td>
+                <td>{{link.count}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+    {% endif %}
 </div>
 
 <script>

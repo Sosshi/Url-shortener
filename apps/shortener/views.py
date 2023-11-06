@@ -1,4 +1,5 @@
 import secrets, string
+from typing import Any
 
 from django.views.generic import CreateView
 from django.shortcuts import redirect, render
@@ -15,9 +16,19 @@ class Home(CreateView):
         "original_url",
     ]
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        try:
+            context["links"] = ShortnerModel.objects.filter(user=self.request.user)
+        except Exception:
+            pass
+        return context
+
 
 def redirect_url_to_original(request, shortened):
     original_url = ShortnerModel.objects.filter(slug=shortened).first()
+    original_url.count = original_url.count + 1
+    original_url.save()
     return redirect(original_url.original_url)
 
 
@@ -30,7 +41,7 @@ def shorten_url_view(request):
                 for _ in range(secrets.randbelow(7) + 4)
             )
             shortened_url = ShortnerModel.objects.create(
-                original_url=url, slug=random_slug
+                original_url=url, slug=random_slug, user=request.user
             )
             return HttpResponse(
                 f"""
