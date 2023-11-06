@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {% if user.is_authenticated %}
+            <p>Welcome {{ user.username }} !!!</p>
+            <form hx-post="{% url 'shorten_url' %}" hx-target="#message">
+                {% csrf_token %}
+                <input type="url" name="url" class="form-control mb-2" placeholder="Enter Url" required>
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </form>
+            <div id="message" class="mt-3">
+                
+            </div>
+            {% else %}
+            <form method="POST" action="{% url 'redirect-to-login' %}">
+                {% csrf_token %}
+                <input type="url" name="url" class="form-control mb-2" placeholder="Enter Url" required>
+                <button type="submit" class="btn btn-primary">Generate URL</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    function triggerCopy() {
+        // get the container
+        const element = document.querySelector('#message_text');
+        // Create a fake `textarea` and set the contents to the text
+        // you want to copy
+        const storage = document.createElement('textarea');
+        storage.value = element.innerHTML;
+        element.appendChild(storage);
+      
+        // Copy the text in the fake `textarea` and remove the `textarea`
+        storage.select();
+        storage.setSelectionRange(0, 99999);
+        document.execCommand('copy');
+        element.removeChild(storage);
+    }
+</script>
+
+{% endblock content %}
